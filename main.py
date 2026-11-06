@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from models import Product
+from database import Session
 
 app=FastAPI()
 
@@ -16,6 +17,7 @@ products = [
 
 @app.get("/products")
 def get_all_products():
+  db = Session()
   return products
 
 @app.get("/product{id}")
