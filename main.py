@@ -58,12 +58,17 @@ def add_product(product: Product,db:Session = Depends(get_db)):
   return product
 
 @app.put("/product")
-def update_product(id:int,product:Product):
-  for i in range(len(products)):
-    if products[i].id == id:
-      products[i] = product
-      return "prod added succeessfully"
-  return "prod not ava"
+def update_product(id:int,product:Product,db:Session = Depends(get_db)):
+  db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
+  if db_product:
+      db_product.name = product.name
+      db_product.desc = product.desc
+      db_product.price = product.price
+      db_product.quantity = product.quantity
+      db.commit()
+      return "prod updated"
+  else:
+    return "prod not ava"
 
 @app.delete("/product")
 def delete_product(id:int,product:Product):
