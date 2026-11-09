@@ -40,7 +40,6 @@ init_db()
 
 @app.get("/products")
 def get_all_products(db:Session = Depends(get_db)):
-
   db_products = db.query(db_models.Product).all()
   return db_products
 
@@ -71,9 +70,11 @@ def update_product(id:int,product:Product,db:Session = Depends(get_db)):
     return "prod not ava"
 
 @app.delete("/product")
-def delete_product(id:int,product:Product):
-  for i in range(len(products)):
-    if products[i].id == id:
-      del products[i]
-      return "prod deleted succeessfully"
-  return "prod not ava"
+def delete_product(id:int,product:Product,db:Session = Depends(get_db)):
+  db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
+  if db_product:
+    db.delete(db_product)
+    db.commit()
+    return "prod deleted succeessfully"
+  else:
+    return "prod not ava"
