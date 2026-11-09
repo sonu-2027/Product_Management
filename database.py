@@ -18,7 +18,7 @@ DB_URL = (
 )
 
 engine = create_engine(DB_URL)
-Session = sessionmaker(
+session = sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine
