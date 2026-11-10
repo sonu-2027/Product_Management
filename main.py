@@ -43,20 +43,20 @@ def get_all_products(db:Session = Depends(get_db)):
   db_products = db.query(db_models.Product).all()
   return db_products
 
-@app.get("/product{id}")
+@app.get("/products{id}")
 def get_product_by_id(id:int,db:Session = Depends(get_db)):
   db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
   if db_product:
     return db_product
   return "Product not found"
 
-@app.post("/product")
+@app.post("/products")
 def add_product(product: Product,db:Session = Depends(get_db)):
   db.add(db_models.Product(**product.model_dump()))
   db.commit()
   return product
 
-@app.put("/product")
+@app.put("/products")
 def update_product(id:int,product:Product,db:Session = Depends(get_db)):
   db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
   if db_product:
@@ -69,7 +69,7 @@ def update_product(id:int,product:Product,db:Session = Depends(get_db)):
   else:
     return "prod not ava"
 
-@app.delete("/product")
+@app.delete("/products")
 def delete_product(id:int,product:Product,db:Session = Depends(get_db)):
   db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
   if db_product:
