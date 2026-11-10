@@ -64,7 +64,7 @@ def add_product(product: Product,db:Session = Depends(get_db)):
   db.commit()
   return product
 
-@app.put("/products")
+@app.put("/products/{id}")
 def update_product(id:int,product:Product,db:Session = Depends(get_db)):
   db_product = db.query(db_models.Product).filter(db_models.Product.id == id).first()
   if db_product:
