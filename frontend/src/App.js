@@ -93,7 +93,7 @@ function App() {
         (p) =>
           String(p.id).includes(q) ||
           p.name?.toLowerCase().includes(q) ||
-          p.description?.toLowerCase().includes(q),
+          p.desc?.toLowerCase().includes(q),
       );
     }
 
@@ -129,7 +129,7 @@ function App() {
 
   // Reset form
   const resetForm = () => {
-    setForm({ id: "", name: "", description: "", price: "", quantity: "" });
+    setForm({ id: "", name: "", desc: "", price: "", quantity: "" });
     setEditId(null);
   };
 
@@ -253,9 +253,9 @@ function App() {
               />
               <input
                 type="text"
-                name="description"
-                placeholder="Description"
-                value={form.description}
+                name="desc"
+                placeholder="Desc"
+                value={form.desc}
                 onChange={handleChange}
                 required
               />
@@ -322,7 +322,7 @@ function App() {
                       >
                         Name
                       </th>
-                      <th>Description</th>
+                      <th>Desc</th>
                       <th
                         className={`sortable ${sortField === "price" ? `sort-${sortDirection}` : ""}`}
                         onClick={() => handleSort("price")}
@@ -343,8 +343,8 @@ function App() {
                       <tr key={p.id}>
                         <td>{p.id}</td>
                         <td className="name-cell">{p.name}</td>
-                        <td className="desc-cell" title={p.description}>
-                          {p.description}
+                        <td className="desc-cell" title={p.desc}>
+                          {p.desc}
                         </td>
                         <td className="price-cell">${currency(p.price)}</td>
                         <td>
