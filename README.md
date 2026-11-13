@@ -24,7 +24,7 @@ FastAPI Product Management API is a backend REST API application built using Fas
 - FastAPI
 - Pydantic
 - SQLAlchemy
-- SQLite / PostgreSQL
+- PostgreSQL
 - Uvicorn
 
 ## Learning Objectives
